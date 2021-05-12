@@ -6,6 +6,7 @@ import {TableHeadCell} from "@/components/dataTable/TableHeadCell";
 import {VueComponent} from "@/shims-vue";
 import {TableBody} from "@/components/dataTable/TableBody";
 import {TableCell} from "@/components/dataTable/TableCell";
+import {StringFilter} from "@/components/dataTable/filters/StringFilter";
 
 
 export interface DataTableOptionsProps {
@@ -15,6 +16,7 @@ export interface DataTableOptionsProps {
 interface OptionsInterface {
     columns: Array<ColumnInterface>
     dataSource: Function | Array<any>;
+    useFilters?: boolean
 }
 
 interface ColumnInterface {
@@ -24,10 +26,10 @@ interface ColumnInterface {
 }
 
 export enum COLUMN_TYPE {
-    STRING,
-    NUMBER,
-    BOOL,
-    DATE
+    STRING = "STRING",
+    NUMBER = "NUMBER",
+    BOOL = "BOOL",
+    DATE = "DATE"
 }
 
 interface AnyEntityInterface {
@@ -38,6 +40,13 @@ interface AnyEntityInterface {
 export class DataTable extends VueComponent<DataTableOptionsProps> {
 
     @Prop() options!: OptionsInterface
+
+    private filters: any = {
+        DATE: TableCell,
+        STRING: StringFilter,
+        NUMBER: TableCell,
+        BOOL: TableCell,
+    }
 
     render() {
         console.log('options: ', this.options)
@@ -68,6 +77,30 @@ export class DataTable extends VueComponent<DataTableOptionsProps> {
             })
         }
 
+        const useFilters = this.options.useFilters || false
+
+        let filters = null
+
+        if (useFilters) {
+            if (Array.isArray(this.options.dataSource)) {
+                filters = this.options.dataSource.map((row: AnyEntityInterface) => {
+                    const columns = this.options.columns.map(column => {
+                        const Filter = this.filters[column.type!]
+                        return (
+                            <TableCell>
+                                <Filter/>
+                            </TableCell>
+                        )
+                    })
+                    return (
+                        <TableRow>
+                            {columns}
+                        </TableRow>
+                    )
+                })
+            }
+        }
+
         return (
             <div>
                 <Table>
@@ -75,6 +108,7 @@ export class DataTable extends VueComponent<DataTableOptionsProps> {
                         <TableRow>
                             {columns}
                         </TableRow>
+                        {this.filters}
                     </TableHead>
                     <TableBody>
                         {tableRows}

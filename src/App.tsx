@@ -1,5 +1,5 @@
 import {Component, Vue} from 'vue-property-decorator';
-import {DataTable} from "@/components/dataTable/DataTable";
+import {COLUMN_TYPE, DataTable} from "@/components/dataTable/DataTable";
 
 import './App.css'
 import './components/dataTable/tableStyle.css'
@@ -13,10 +13,10 @@ export default class App extends Vue {
                 <DataTable
                     options={{
                         columns: [
-                            {title: 'First name', dataSource: 'firstName'},
-                            {dataSource: 'lastName', title: 'Last name'},
-                            {dataSource: 'age', title: 'Age'},
-                            {dataSource: 'birthday', title: 'Birthday'},
+                            {title: 'First name', dataSource: 'firstName', type: COLUMN_TYPE.STRING},
+                            {dataSource: 'lastName', title: 'Last name', type: COLUMN_TYPE.STRING},
+                            {dataSource: 'age', title: 'Age', type: COLUMN_TYPE.NUMBER},
+                            {dataSource: 'birthday', title: 'Birthday', type: COLUMN_TYPE.DATE},
                         ],
                         dataSource: [
                             {
