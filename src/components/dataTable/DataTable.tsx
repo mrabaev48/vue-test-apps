@@ -83,38 +83,36 @@ export class DataTable extends VueComponent<DataTableOptionsProps> {
 
         if (useFilters) {
             if (Array.isArray(this.options.dataSource)) {
-                filters = this.options.dataSource.map((row: AnyEntityInterface) => {
-                    const columns = this.options.columns.map(column => {
-                        const Filter = this.filters[column.type!]
-                        return (
-                            <TableCell>
-                                <Filter/>
-                            </TableCell>
-                        )
-                    })
+                const cols = this.options.columns.map((col) => {
+                    const Filter = this.filters[col.type!]
                     return (
-                        <TableRow>
-                            {columns}
-                        </TableRow>
+                        <TableCell>
+                            <Filter/>
+                        </TableCell>
                     )
                 })
+
+                filters = (
+                    <TableRow>
+                        {cols}
+                    </TableRow>
+                )
             }
         }
-
-        return (
-            <div>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            {columns}
-                        </TableRow>
-                        {this.filters}
-                    </TableHead>
-                    <TableBody>
-                        {tableRows}
-                    </TableBody>
-                </Table>
-            </div>
-        )
+            return (
+                <div>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                {columns}
+                            </TableRow>
+                            {filters}
+                        </TableHead>
+                        <TableBody>
+                            {tableRows}
+                        </TableBody>
+                    </Table>
+                </div>
+            )
+        }
     }
-}

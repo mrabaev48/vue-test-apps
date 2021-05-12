@@ -49,7 +49,8 @@ export default class App extends Vue {
                                 age: 29,
                                 birthday: '22-08-1994'
                             },
-                        ]
+                        ],
+                        useFilters: true
                     }}
                 />
             </div>
