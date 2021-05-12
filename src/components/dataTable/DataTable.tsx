@@ -19,7 +19,15 @@ interface OptionsInterface {
 
 interface ColumnInterface {
     title: string,
-    dataSource: string
+    dataSource: string,
+    type?: COLUMN_TYPE
+}
+
+export enum COLUMN_TYPE {
+    STRING,
+    NUMBER,
+    BOOL,
+    DATE
 }
 
 interface AnyEntityInterface {
