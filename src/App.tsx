@@ -16,7 +16,7 @@ export default class App extends Vue {
                             {title: 'First name', dataSource: 'firstName', type: COLUMN_TYPE.STRING},
                             {dataSource: 'lastName', title: 'Last name', type: COLUMN_TYPE.STRING},
                             {dataSource: 'age', title: 'Age', type: COLUMN_TYPE.NUMBER},
-                            {dataSource: 'birthday', title: 'Birthday', type: COLUMN_TYPE.DATE},
+                            {dataSource: 'birthday', title: 'Birthday', type: COLUMN_TYPE.BOOL},
                         ],
                         dataSource: [
                             {

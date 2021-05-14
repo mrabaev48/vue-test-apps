@@ -7,6 +7,8 @@ import {VueComponent} from "@/shims-vue";
 import {TableBody} from "@/components/dataTable/TableBody";
 import {TableCell} from "@/components/dataTable/TableCell";
 import {StringFilter} from "@/components/dataTable/filters/StringFilter";
+import {NumberFilter} from "@/components/dataTable/filters/NumberFilters";
+import {BoolFilter} from "@/components/dataTable/filters/BoolFilter";
 
 
 export interface DataTableOptionsProps {
@@ -44,8 +46,8 @@ export class DataTable extends VueComponent<DataTableOptionsProps> {
     private filters: any = {
         DATE: TableCell,
         STRING: StringFilter,
-        NUMBER: TableCell,
-        BOOL: TableCell,
+        NUMBER: NumberFilter,
+        BOOL: BoolFilter,
     }
 
     render() {
