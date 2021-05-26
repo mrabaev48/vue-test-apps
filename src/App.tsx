@@ -3,20 +3,37 @@ import {COLUMN_TYPE, DataTable} from "@/components/dataTable/DataTable";
 
 import './App.css'
 import './components/dataTable/tableStyle.css'
+import {VNode} from "vue";
 
 @Component
 export default class App extends Vue {
-    render() {
 
+    render(): VNode {
         return (
             <div id="app">
                 <DataTable
                     options={{
                         columns: [
-                            {title: 'First name', dataSource: 'firstName', type: COLUMN_TYPE.STRING},
-                            {dataSource: 'lastName', title: 'Last name', type: COLUMN_TYPE.STRING},
-                            {dataSource: 'age', title: 'Age', type: COLUMN_TYPE.NUMBER},
-                            {dataSource: 'birthday', title: 'Birthday', type: COLUMN_TYPE.BOOL},
+                            {
+                                title: 'First name',
+                                dataSource: 'firstName',
+                                type: COLUMN_TYPE.STRING
+                            },
+                            {
+                                dataSource: 'lastName',
+                                title: 'Last name',
+                                type: COLUMN_TYPE.STRING
+                            },
+                            {
+                                dataSource: 'age',
+                                title: 'Age',
+                                type: COLUMN_TYPE.NUMBER
+                            },
+                            {
+                                dataSource: 'birthday',
+                                title: 'Birthday',
+                                type: COLUMN_TYPE.BOOL
+                            },
                         ],
                         dataSource: [
                             {

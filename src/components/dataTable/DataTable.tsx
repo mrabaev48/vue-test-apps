@@ -16,22 +16,28 @@ export interface DataTableOptionsProps {
 }
 
 interface OptionsInterface {
-    columns: Array<ColumnInterface>
+    columns: Array<ColumnInterface>;
     dataSource: Function | Array<any>;
-    useFilters?: boolean
+    useEdit?: boolean;
+    useDelete?: boolean;
+    useFilters?: boolean;
+    useSorting?: boolean;
 }
 
 interface ColumnInterface {
-    title: string,
-    dataSource: string,
-    type?: COLUMN_TYPE
+    title: string;
+    dataSource: string;
+    type: COLUMN_TYPE;
+    useSorting?: boolean;
+    useFilters?: boolean;
 }
 
 export enum COLUMN_TYPE {
     STRING = "STRING",
     NUMBER = "NUMBER",
     BOOL = "BOOL",
-    DATE = "DATE"
+    DATE = "DATE",
+    ACTION = "ACTION",
 }
 
 interface AnyEntityInterface {
@@ -41,7 +47,8 @@ interface AnyEntityInterface {
 @Component
 export class DataTable extends VueComponent<DataTableOptionsProps> {
 
-    @Prop() options!: OptionsInterface
+    @Prop()
+    options!: OptionsInterface
 
     private filters: any = {
         DATE: TableCell,
@@ -50,71 +57,135 @@ export class DataTable extends VueComponent<DataTableOptionsProps> {
         BOOL: BoolFilter,
     }
 
+    mounted() {
+        if (this.isActionColumnNeeded()) {
+            this.options.columns.push({
+                type: COLUMN_TYPE.ACTION,
+                dataSource: '',
+                title: 'Actions'
+            })
+        }
+    }
+
+    isActionColumnNeeded(): boolean {
+
+        if (
+            this.options.useFilters !== false ||
+            this.options.useEdit !== false ||
+            this.options.useDelete !== false
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
     render() {
-        console.log('options: ', this.options)
+        console.log(this.options);
+
         const columns = this.options.columns.map(column => {
             return (
                 <TableHeadCell>
                     {column.title}
                 </TableHeadCell>
-            )
+            );
         })
 
-        let tableRows = null
+        if (this.isActionColumnNeeded()) {
+            const ActionColumnHeadCell = (
+                <TableHeadCell>
+                    Actions
+                </TableHeadCell>
+            )
+            columns.push(ActionColumnHeadCell);
+        }
+
+        let tableRows = null;
 
         if (Array.isArray(this.options.dataSource)) {
             tableRows = this.options.dataSource.map((row: AnyEntityInterface) => {
                 const columns = this.options.columns.map(column => {
+                    console.log('COLUMN: ', column.type);
                     return (
                         <TableCell>
                             {row[column.dataSource]}
                         </TableCell>
-                    )
-                })
+                    );
+                });
+
+                if (this.isActionColumnNeeded()) {
+                    const ActionBodyCell = (
+                        <TableCell>
+
+                        </TableCell>
+                    );
+
+                    columns.push(ActionBodyCell);
+                }
+
                 return (
                     <TableRow>
                         {columns}
                     </TableRow>
-                )
+                );
             })
         }
 
-        const useFilters = this.options.useFilters || false
+        const useFilters = this.options.useFilters || false;
 
-        let filters = null
+        let filters = null;
+
+        console.log('isActionColumnNeeded: ', this.isActionColumnNeeded());
 
         if (useFilters) {
             if (Array.isArray(this.options.dataSource)) {
                 const cols = this.options.columns.map((col) => {
-                    const Filter = this.filters[col.type!]
+
+                    if (col.useFilters === false) {
+                        return (
+                            <TableCell/>
+                        );
+                    }
+
+                    const Filter = this.filters[col.type!];
+
                     return (
                         <TableCell>
                             <Filter/>
                         </TableCell>
-                    )
+                    );
                 })
+
+                if (this.isActionColumnNeeded()) {
+                    const EmptyActionCell = (
+                        <TableCell>
+                            {this.options.useFilters !== false ? (<button>Apply Filters</button>) : ('')}
+                        </TableCell>
+                    );
+                    cols.push(EmptyActionCell);
+                }
 
                 filters = (
                     <TableRow>
                         {cols}
                     </TableRow>
-                )
+                );
             }
         }
-            return (
-                <div>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                {columns}
-                            </TableRow>
-                            {filters}
-                        </TableHead>
-                        <TableBody>
-                            {tableRows}
-                        </TableBody>
-                    </Table>
-                </div>
-            )
-        }
+        return (
+            <div>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            {columns}
+                        </TableRow>
+                        {filters}
+                    </TableHead>
+                    <TableBody>
+                        {tableRows}
+                    </TableBody>
+                </Table>
+            </div>
+        );
     }
+}

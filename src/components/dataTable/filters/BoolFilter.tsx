@@ -10,7 +10,6 @@ export class BoolFilter extends VueComponent {
 
     onValueChanged(event: Event) {
         console.log('newVal: ', event)
-        // this.selectedValue = newVal
     }
 
     render(): VNode {
