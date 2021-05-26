@@ -138,39 +138,37 @@ export class DataTable extends VueComponent<DataTableOptionsProps> {
         console.log('isActionColumnNeeded: ', this.isActionColumnNeeded());
 
         if (useFilters) {
-            if (Array.isArray(this.options.dataSource)) {
-                const cols = this.options.columns.map((col) => {
+            const cols = this.options.columns.map((col) => {
 
-                    if (col.useFilters === false) {
-                        return (
-                            <TableCell/>
-                        );
-                    }
-
-                    const Filter = this.filters[col.type!];
-
+                if (col.useFilters === false) {
                     return (
-                        <TableCell>
-                            <Filter/>
-                        </TableCell>
+                        <TableCell/>
                     );
-                })
-
-                if (this.isActionColumnNeeded()) {
-                    const EmptyActionCell = (
-                        <TableCell>
-                            {this.options.useFilters !== false ? (<button>Apply Filters</button>) : ('')}
-                        </TableCell>
-                    );
-                    cols.push(EmptyActionCell);
                 }
 
-                filters = (
-                    <TableRow>
-                        {cols}
-                    </TableRow>
+                const Filter = this.filters[col.type!];
+
+                return (
+                    <TableCell>
+                        <Filter/>
+                    </TableCell>
                 );
+            })
+
+            if (this.isActionColumnNeeded()) {
+                const EmptyActionCell = (
+                    <TableCell>
+                        {this.options.useFilters !== false ? (<button>Apply Filters</button>) : ('')}
+                    </TableCell>
+                );
+                cols.push(EmptyActionCell);
             }
+
+            filters = (
+                <TableRow>
+                    {cols}
+                </TableRow>
+            );
         }
         return (
             <div>
