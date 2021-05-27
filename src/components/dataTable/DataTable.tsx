@@ -10,6 +10,10 @@ import {StringFilter} from "@/components/dataTable/filters/StringFilter";
 import {NumberFilter} from "@/components/dataTable/filters/NumberFilters";
 import {BoolFilter} from "@/components/dataTable/filters/BoolFilter";
 import {DataTableContext} from "@/components/dataTable/config/DataTableContext"
+import {CustomProvider} from "@/components/dataTable/config/CustomProvider";
+
+import Child from "@/components/dataTable/config/Child.vue"
+
 
 
 export interface DataTableOptionsProps {
@@ -195,6 +199,9 @@ export class DataTable extends VueComponent<DataTableOptionsProps> {
                     </TableBody>
                 </Table>
                 </DataTableContext.Provider>
+                <CustomProvider>
+                    <Child/>
+                </CustomProvider>
             </div>
         );
     }
