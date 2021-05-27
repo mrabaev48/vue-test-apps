@@ -9,6 +9,7 @@ import {TableCell} from "@/components/dataTable/TableCell";
 import {StringFilter} from "@/components/dataTable/filters/StringFilter";
 import {NumberFilter} from "@/components/dataTable/filters/NumberFilters";
 import {BoolFilter} from "@/components/dataTable/filters/BoolFilter";
+import {DataTableContext} from "@/components/dataTable/config/DataTableContext";
 
 
 export interface DataTableOptionsProps {
@@ -80,9 +81,7 @@ export class DataTable extends VueComponent<DataTableOptionsProps> {
         return false;
     }
 
-    render() {
-        console.log(this.options);
-
+    collectAllColumns (): Array<JSX.Element> {
         const columns = this.options.columns.map(column => {
             return (
                 <TableHeadCell>
@@ -100,12 +99,15 @@ export class DataTable extends VueComponent<DataTableOptionsProps> {
             columns.push(ActionColumnHeadCell);
         }
 
-        let tableRows = null;
+        return  columns;
+    }
+
+    collectRows(): Array<JSX.Element> {
+        let tableRows = new Array<JSX.Element>();
 
         if (Array.isArray(this.options.dataSource)) {
             tableRows = this.options.dataSource.map((row: AnyEntityInterface) => {
                 const columns = this.options.columns.map(column => {
-                    console.log('COLUMN: ', column.type);
                     return (
                         <TableCell>
                             {row[column.dataSource]}
@@ -131,14 +133,16 @@ export class DataTable extends VueComponent<DataTableOptionsProps> {
             })
         }
 
+        return tableRows;
+    }
+
+    collectFilters(): Array<JSX.Element> {
         const useFilters = this.options.useFilters || false;
 
-        let filters = null;
-
-        console.log('isActionColumnNeeded: ', this.isActionColumnNeeded());
+        let filters = new Array<JSX.Element>();
 
         if (useFilters) {
-            const cols = this.options.columns.map((col) => {
+            filters = this.options.columns.map((col) => {
 
                 if (col.useFilters === false) {
                     return (
@@ -161,28 +165,35 @@ export class DataTable extends VueComponent<DataTableOptionsProps> {
                         {this.options.useFilters !== false ? (<button>Apply Filters</button>) : ('')}
                     </TableCell>
                 );
-                cols.push(EmptyActionCell);
+                filters.push(EmptyActionCell);
             }
-
-            filters = (
-                <TableRow>
-                    {cols}
-                </TableRow>
-            );
         }
+
+        return filters;
+    }
+
+    render() {
+        const columns = this.collectAllColumns();
+        const tableRows = this.collectRows();
+        const filters = this.collectFilters();
+
         return (
             <div>
+                <DataTableContext.Provider value={this.options}>
                 <Table>
                     <TableHead>
                         <TableRow>
                             {columns}
                         </TableRow>
-                        {filters}
+                        <TableRow>
+                            {filters}
+                        </TableRow>
                     </TableHead>
                     <TableBody>
                         {tableRows}
                     </TableBody>
                 </Table>
+                </DataTableContext.Provider>
             </div>
         );
     }

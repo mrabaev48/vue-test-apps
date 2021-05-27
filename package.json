@@ -8,8 +8,10 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "linqscript": "^1.4.3",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
+    "vue-create-context": "^1.1.0",
     "vue-property-decorator": "^9.1.2",
     "vuex": "^3.4.0"
   },

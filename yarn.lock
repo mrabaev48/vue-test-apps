@@ -5006,6 +5006,11 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
+linqscript@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/linqscript/-/linqscript-1.4.3.tgz#082ad6ffc78b16b1d37720eb4a520e81f99bf92c"
+  integrity sha512-vw0jh/PEDUw+u7TzSY0mXFmZXStSP2gbTOsDiCpRiWQXd4fFbXMG0969kTvCkTFzfw8HbHsxqXk17neYL7kG6w==
+
 loader-runner@^2.3.1, loader-runner@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/loader-runner/-/loader-runner-2.4.0.tgz#ed47066bfe534d7e84c4c7b9998c2a75607d9357"
@@ -7958,6 +7963,11 @@ vue-class-component@^7.2.3:
   version "7.2.6"
   resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-7.2.6.tgz#8471e037b8e4762f5a464686e19e5afc708502e4"
   integrity sha512-+eaQXVrAm/LldalI272PpDe3+i4mPis0ORiMYxF6Ae4hyuCh15W8Idet7wPUEs4N4YptgFHGys4UrgNQOMyO6w==
+
+vue-create-context@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/vue-create-context/-/vue-create-context-1.1.0.tgz#8f8f3a921453491bdb5e65aa6ff748be58c27a01"
+  integrity sha512-ZAJjB7ACu4s3rju1J6bj7LsUrpF+QVUf8y1ZkCJAEesOWl4j+VOmbA6UVzVaUPTmVXHaiJdLg5AU66BOfDiT4Q==
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"

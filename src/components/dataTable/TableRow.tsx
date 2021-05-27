@@ -7,7 +7,7 @@ export class TableRow extends VueComponent {
     render(): VNode {
         return (
             <tr>
-            {this.$slots.default}
+                {this.$slots.default}
             </tr>
         )
     }
