@@ -9,7 +9,7 @@ import {TableCell} from "@/components/dataTable/TableCell";
 import {StringFilter} from "@/components/dataTable/filters/StringFilter";
 import {NumberFilter} from "@/components/dataTable/filters/NumberFilters";
 import {BoolFilter} from "@/components/dataTable/filters/BoolFilter";
-import {DataTableContext} from "@/components/dataTable/config/DataTableContext";
+import {DataTableContext} from "@/components/dataTable/config/DataTableContext"
 
 
 export interface DataTableOptionsProps {
@@ -173,6 +173,7 @@ export class DataTable extends VueComponent<DataTableOptionsProps> {
     }
 
     render() {
+
         const columns = this.collectAllColumns();
         const tableRows = this.collectRows();
         const filters = this.collectFilters();
