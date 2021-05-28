@@ -1,16 +1,14 @@
 import {Component, Vue} from "vue-property-decorator";
 import {VNode} from "vue";
-import {VueComponent} from "@/shims-vue";
-
-import styles from './tableStyle.css?module'
+import {ConsumerComponent} from "@/components/dataTable/config/ConsumerComponent";
 
 @Component
-export class Table extends VueComponent {
+export class TableHeadCell extends ConsumerComponent {
     render(): VNode {
         return (
-            <table class={styles}>
+            <th>
                 {this.$slots.default}
-            </table>
+            </th>
         )
     }
 }

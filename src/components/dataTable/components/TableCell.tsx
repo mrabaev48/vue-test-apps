@@ -1,9 +1,9 @@
 import {Component, Vue} from "vue-property-decorator";
 import {VNode} from "vue";
-import {VueComponent} from "@/shims-vue";
+import {ConsumerComponent} from "@/components/dataTable/config/ConsumerComponent";
 
 @Component
-export class TableCell extends VueComponent {
+export class TableCell extends ConsumerComponent {
     render(): VNode {
         return (
             <td>

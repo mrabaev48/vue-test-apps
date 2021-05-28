@@ -1,9 +1,10 @@
 import {Component, Vue} from 'vue-property-decorator';
-import {COLUMN_TYPE, DataTable} from "@/components/dataTable/DataTable";
 
 import './App.css'
-import './components/dataTable/tableStyle.css'
+import './components/dataTable/style/tableStyle.css'
 import {VNode} from "vue";
+import {COLUMN_TYPE} from "@/components/dataTable/models/ColumnTypes";
+import {DataTable} from "@/components/dataTable/DataTable";
 
 @Component
 export default class App extends Vue {
