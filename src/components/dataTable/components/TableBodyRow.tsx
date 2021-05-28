@@ -41,6 +41,7 @@ export class TableBodyRow extends ConsumerComponent<TableBodyRowProp> {
                 <Cell
                     row={this.row}
                     column={column}
+                    cellValue={this.row[column.dataSource]}
                 />
             );
         });

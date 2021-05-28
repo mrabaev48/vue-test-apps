@@ -1,4 +1,4 @@
-import {Component, Prop, Vue} from "vue-property-decorator";
+import {Component, Prop, Vue, Watch} from "vue-property-decorator";
 import {VNode} from "vue";
 import {ConsumerComponent} from "@/components/dataTable/config/ConsumerComponent";
 import {AnyEntityInterface} from "@/components/dataTable/models/AnyEntityInterface";
@@ -15,8 +15,16 @@ export class StringCell extends ConsumerComponent<CellPropInterface> {
     @Prop({type: Object})
     column!: ColumnInterface
 
+    @Prop()
+    cellValue!: any
+
     handleValueChanged(sender: EventListener) {
         console.log('e: ', sender)
+    }
+
+    @Watch('cellValue')
+    cellValueChanged(value: any) {
+        console.log('new val: ', value)
     }
 
     renderReadMod() {

@@ -2,6 +2,7 @@ import {AnyEntityInterface} from "@/components/dataTable/models/AnyEntityInterfa
 import {ColumnInterface} from "@/components/dataTable/models/ColumnInterface";
 
 export interface CellPropInterface {
-    row: AnyEntityInterface
-    column: ColumnInterface
+    row: AnyEntityInterface;
+    column: ColumnInterface;
+    cellValue: any
 }
