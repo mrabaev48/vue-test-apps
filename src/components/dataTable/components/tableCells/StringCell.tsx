@@ -41,7 +41,7 @@ export class StringCell extends ConsumerComponent<CellPropInterface> {
         const editRow = this.context.state.editRow!;
         return (
             <TableCell>
-                <input type={'text'} value={editRow[this.column.dataSource]} onChange={this.handleValueChanged}/>
+                <input type={'text'} value={editRow[this.column.dataSource]} vModel={this.cellValue} onChange={this.handleValueChanged}/>
             </TableCell>
         )
     }
