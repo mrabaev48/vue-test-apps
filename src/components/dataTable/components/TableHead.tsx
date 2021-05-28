@@ -4,13 +4,17 @@ import {ConsumerComponent} from "@/components/dataTable/config/ConsumerComponent
 import {TableHeadCell} from "@/components/dataTable/components/TableHeadCell";
 import {TableRow} from "@/components/dataTable/components/TableRow";
 import {TableCell} from "@/components/dataTable/components/TableCell";
-import {StringFilter} from "@/components/dataTable/filters/StringFilter";
-import {NumberFilter} from "@/components/dataTable/filters/NumberFilters";
-import {BoolFilter} from "@/components/dataTable/filters/BoolFilter";
+import {StringFilter} from "@/components/dataTable/components/filters/StringFilter";
+import {NumberFilter} from "@/components/dataTable/components/filters/NumberFilters";
+import {BoolFilter} from "@/components/dataTable/components/filters/BoolFilter";
 
+
+export interface TableHeadPropInterface {
+
+}
 
 @Component
-export class TableHead extends ConsumerComponent {
+export class TableHead extends ConsumerComponent<TableHeadPropInterface> {
 
     private filters: any = {
         DATE: TableCell,

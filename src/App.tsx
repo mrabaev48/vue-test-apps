@@ -31,44 +31,50 @@ export default class App extends Vue {
                                 type: COLUMN_TYPE.NUMBER
                             },
                             {
-                                dataSource: 'birthday',
-                                title: 'Birthday',
+                                dataSource: 'isActive',
+                                title: 'Is Active',
                                 type: COLUMN_TYPE.BOOL
                             },
                         ],
                         dataSource: [
                             {
+                                id: 1,
                                 firstName: 'Alex',
                                 lastName: 'Koehler',
                                 age: 20,
-                                birthday: '22-08-1994'
+                                isActive: true
                             },
                             {
+                                id: 2,
                                 firstName: 'Mitch',
                                 lastName: 'Lucker',
                                 age: 25,
-                                birthday: '22-08-1994'
+                                isActive: false
                             },
                             {
+                                id: 3,
                                 firstName: 'Oliver',
                                 lastName: 'Syckes',
                                 age: 23,
-                                birthday: '22-08-1994'
+                                isActive: true
                             },
                             {
+                                id: 4,
                                 firstName: 'Aaron',
                                 lastName: 'Kitcher',
                                 age: 28,
-                                birthday: '22-08-1994'
+                                isActive: false
                             },
                             {
+                                id: 5,
                                 firstName: 'Danny',
                                 lastName: 'Worsnop',
                                 age: 29,
-                                birthday: '22-08-1994'
+                                isActive: true
                             },
                         ],
-                        useFilters: true
+                        useFilters: true,
+                        uniqueKey: 'id'
                     }}
                 />
             </div>

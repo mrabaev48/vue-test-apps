@@ -4,8 +4,12 @@ import {VNode} from "vue";
 import styles from '../style/tableStyle.css?module'
 import {ConsumerComponent} from "@/components/dataTable/config/ConsumerComponent";
 
+export interface TablePropInterface {
+
+}
+
 @Component
-export class Table extends ConsumerComponent {
+export class Table extends ConsumerComponent<TablePropInterface> {
     render(): VNode {
         return (
             <table class={styles}>

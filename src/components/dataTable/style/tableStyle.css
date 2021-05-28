@@ -16,8 +16,28 @@
 .dt-Table th {
     padding-top: 12px;
     padding-bottom: 12px;
-    text-align: left;
+    text-align: center;
     background-color: #404040;
     color: white;
-    text-align: center;
+}
+
+.dt-Table tfoot {
+    background-color: #404040;
+    color: white;
+}
+
+.dt-Table button.action-button {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    margin-right: 5px;
+}
+
+.dt-Table button.action-button:hover {
+    background-color: #e7e7e7;
+    cursor: pointer;
+}
+
+.dt-Table tbody p {
+    margin: 0;
 }
