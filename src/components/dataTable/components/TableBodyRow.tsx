@@ -33,6 +33,10 @@ export class TableBodyRow extends ConsumerComponent<TableBodyRowProp> {
         this.context.actions.editRow(row);
     }
 
+    saveRecord() {
+        this.context.actions.saveRow();
+    }
+
     render(): VNode {
 
         const columns = this.context.options.columns.map(column => {
@@ -53,10 +57,15 @@ export class TableBodyRow extends ConsumerComponent<TableBodyRowProp> {
                         (<button class={'action-button'} onClick={(e: any) => this.deleteRowClickHandler(this.row)}>
                             Delete
                         </button>): ('')}
-                    {this.context.options.useEdit !== false ?
+                    {this.context.options.useEdit !== false && this.context.state.editRow === null ?
                         (<button class={'action-button'} onClick={(e: any) => this.editRowClickHandler(this.row)}>
                             Edit
                         </button>): ('')}
+                    {this.context.options.useEdit !== false && this.context.state.editRow ?
+                        (<button class={'action-button'} onClick={(e: any) => this.saveRecord()}>
+                            Update
+                        </button>): ('')
+                    }
                 </TableCell>
             );
 

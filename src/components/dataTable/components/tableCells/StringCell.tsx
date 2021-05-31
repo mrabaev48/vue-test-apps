@@ -1,4 +1,4 @@
-import {Component, Prop, Vue, Watch} from "vue-property-decorator";
+import {Component, Prop, VModel, Vue, Watch} from "vue-property-decorator";
 import {VNode} from "vue";
 import {ConsumerComponent} from "@/components/dataTable/config/ConsumerComponent";
 import {AnyEntityInterface} from "@/components/dataTable/models/AnyEntityInterface";
@@ -18,13 +18,8 @@ export class StringCell extends ConsumerComponent<CellPropInterface> {
     @Prop()
     cellValue!: any
 
-    handleValueChanged(sender: EventListener) {
-        console.log('e: ', sender)
-    }
-
-    @Watch('cellValue')
-    cellValueChanged(value: any) {
-        console.log('new val: ', value)
+    handleValueChanged(sender: any) {
+        this.context.actions.updateRecord(this.column.dataSource, sender.target.value);
     }
 
     renderReadMod() {
@@ -41,12 +36,14 @@ export class StringCell extends ConsumerComponent<CellPropInterface> {
         const editRow = this.context.state.editRow!;
         return (
             <TableCell>
-                <input type={'text'} value={editRow[this.column.dataSource]} vModel={this.cellValue} onChange={this.handleValueChanged}/>
+                <input type={'text'} value={editRow[this.column.dataSource]}
+                       onkeyup={this.handleValueChanged}/>
             </TableCell>
         )
     }
 
     render(): VNode {
+
         if (this.context.actions.isEdit(this.row)) {
             return this.renderEditMode();
         }

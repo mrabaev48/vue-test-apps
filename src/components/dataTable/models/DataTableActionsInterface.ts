@@ -5,5 +5,6 @@ export interface DataTableActionsInterface {
     isEdit(row: AnyEntityInterface): boolean;
     deleteRow(row: AnyEntityInterface): void;
     editRow(row: AnyEntityInterface): void;
-    updateRecord(row: AnyEntityInterface): void
+    updateRecord(dataSource: string, value: any): void;
+    saveRow(): void
 }

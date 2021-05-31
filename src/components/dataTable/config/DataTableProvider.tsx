@@ -30,11 +30,22 @@ export class DataTableProvider extends VueComponent<ProviderInterface> {
             deleteRow: this.deleteRow,
             editRow: this.editRow,
             updateRecord: this.updateRecord,
+            saveRow: this.saveRow
         }
     }
 
-    updateRecord(row: AnyEntityInterface) {
+    saveRow() {
+        this.providedContext.options.dataSource.map((row: AnyEntityInterface) => {
+            if (row[this.providedContext.options.uniqueKey] === this.providedContext.state.editRow![this.providedContext.options.uniqueKey]) {
+                row = {...row, ...this.providedContext.state.editRow};
+            }
+            return row;
+        })
+        this.providedContext.state.editRow = null;
+    }
 
+    updateRecord(dataSource: string, value: any) {
+        this.providedContext.state.editRow![dataSource] = value;
     }
 
     isEdit(row: AnyEntityInterface): boolean {
