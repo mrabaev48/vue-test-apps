@@ -70,7 +70,12 @@ export class TableHead extends ConsumerComponent<TableHeadPropInterface> {
             if (this.context.actions.isActionColumnNeeded()) {
                 const EmptyActionCell = (
                     <TableCell>
-                        {this.context.options.useFilters !== false ? (<button>Apply Filters</button>) : ('')}
+                        {this.context.options.useFilters !== false ? (
+                            <div>
+                                <button class={'action-button'}>Apply Filters</button>
+                                <button class={'action-button'}>Reset Filters</button>
+                            </div>
+                        ) : ('')}
                     </TableCell>
                 );
                 filters.push(EmptyActionCell);
